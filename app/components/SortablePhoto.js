@@ -14,7 +14,6 @@ export const SortablePhoto = (props) => {
     transform: CSS.Transform.toString(transform),
     transition,
   };
-  const handleCheckboxChange = props.handleCheckboxChange;
 
   return (
     <Photo
@@ -23,7 +22,6 @@ export const SortablePhoto = (props) => {
       {...props}
       {...listeners}
       setActivatorNodeRef={setActivatorNodeRef}
-      handleCheckboxChange={handleCheckboxChange}
     />
   );
 };

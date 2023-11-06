@@ -5,6 +5,7 @@ import React, { forwardRef } from "react";
 // eslint-disable-next-line react/display-name
 export const Photo = forwardRef(
   ({ url, index, faded, style, ...props }, ref) => {
+    // Style for image card
     const inlineStyles = {
       opacity: faded ? "0.2" : "1",
       transformOrigin: "0 0",
@@ -13,10 +14,12 @@ export const Photo = forwardRef(
       gridColumnStart: index === 0 ? "span 2" : null,
       ...style,
     };
+
+    // props destructuring
     const { selectedImages, setSelectedImages } = props;
-    console.log(selectedImages);
+
+    //Handle-checkbox function for selecting images
     const handleCheckboxChange = (index) => {
-      // console.log("handleC", index);
       if (selectedImages.includes(index)) {
         setSelectedImages(
           selectedImages.filter((selectedId) => selectedId !== index)
@@ -39,7 +42,6 @@ export const Photo = forwardRef(
             checked={selectedImages?.includes(index)}
             onMouseDown={(e) => {
               e.preventDefault(); // Prevent the default checkbox behavior
-
               handleCheckboxChange(index);
             }}
             className="absolute m-2"

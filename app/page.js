@@ -39,18 +39,6 @@ const Home = () => {
     setSelectedImages([]);
   }
 
-  //Handle-checkbox function for selecting images
-  const handleCheckboxChange = (index) => {
-    console.log("handleC", index);
-    if (selectedImages.includes(index)) {
-      setSelectedImages(
-        selectedImages.filter((selectedId) => selectedId !== index)
-      );
-    } else {
-      setSelectedImages([...selectedImages, index]);
-    }
-  };
-
   return (
     <div className="lg:mx-96 mx-2 my-20 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
       <div className="flex justify-between border-b-2 py-4 px-4">
@@ -89,7 +77,6 @@ const Home = () => {
                 key={url}
                 url={url}
                 index={index}
-                handleCheckboxChange={handleCheckboxChange}
                 selectedImages={selectedImages}
                 setSelectedImages={setSelectedImages}
               />
