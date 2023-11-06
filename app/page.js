@@ -9,13 +9,11 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 
-import photos from "./../photos.json";
 import { Grid } from "./components/Grid";
 import { SortablePhoto } from "./components/SortablePhoto";
 import { Photo } from "./components/Photo";
 
 const Home = () => {
-  // const [items, setItems] = useState(photos);
   const [items, setItems] = useState([
     "https://i.postimg.cc/tTn9s24Q/image-1.webp",
     "https://i.postimg.cc/brQ8Trnm/image-2.webp",
@@ -29,20 +27,19 @@ const Home = () => {
     "https://i.postimg.cc/76zyHhKq/image-10.jpg",
     "https://i.postimg.cc/nrtfCxWB/image-11.jpg",
   ]);
-  const [selectedImages, setSelectedImages] = useState([]);
-  console.log(selectedImages);
 
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [activeId, setActiveId] = useState(null);
+  const sensors = useSensors(useSensor(MouseSensor));
+
+  // Handle-delete function for the selected image
   function handleDelete() {
     const updatedImages = items.filter((_, i) => !selectedImages.includes(i));
     setItems(updatedImages);
     setSelectedImages([]);
   }
 
-  // console.log(items);
-  // console.log(selectedImages);
-  const [activeId, setActiveId] = useState(null);
-  const sensors = useSensors(useSensor(MouseSensor));
-
+  //Handle-checkbox function for selecting images
   const handleCheckboxChange = (index) => {
     console.log("handleC", index);
     if (selectedImages.includes(index)) {

@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React, { forwardRef } from "react";
 
 // eslint-disable-next-line react/display-name
@@ -10,12 +11,8 @@ export const Photo = forwardRef(
       height: index === 0 ? 410 : 200,
       gridRowStart: index === 0 ? "span 2" : null,
       gridColumnStart: index === 0 ? "span 2" : null,
-      backgroundImage: `url("${url}")`,
-      backgroundPosition: "center",
-      backgroundSize: "cover",
       ...style,
     };
-
     const { selectedImages, setSelectedImages } = props;
     console.log(selectedImages);
     const handleCheckboxChange = (index) => {
@@ -35,7 +32,7 @@ export const Photo = forwardRef(
           ref={ref}
           style={inlineStyles}
           {...props}
-          className="border-2 border-gray-300 rounded-lg relative z-10 "
+          className="image-container"
         >
           <input
             type="checkbox"
@@ -45,11 +42,15 @@ export const Photo = forwardRef(
 
               handleCheckboxChange(index);
             }}
-            className="m-2"
+            className="absolute m-2"
           />
-          {/* <div
-            className={` absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity`}
-          ></div> */}
+          <Image
+            src={url}
+            alt={index}
+            width={200}
+            height={200}
+            className="image w-full h-full border-2 border-gray-300 rounded-lg"
+          />
         </div>
       </>
     );
