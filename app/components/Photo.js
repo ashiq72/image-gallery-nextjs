@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 
 // eslint-disable-next-line react/display-name
 export const Photo = forwardRef(
   ({ url, index, faded, style, ...props }, ref) => {
+    const [checkboxShow, setCheckboxShow] = useState(false);
+
     // Style for image card
     const inlineStyles = {
       opacity: faded ? "0.2" : "1",
@@ -12,11 +14,13 @@ export const Photo = forwardRef(
       height: index === 0 ? 410 : 200,
       gridRowStart: index === 0 ? "span 2" : null,
       gridColumnStart: index === 0 ? "span 2" : null,
+      border: "3px solid #e0e0e0",
+      borderRadius: "10px",
       ...style,
     };
 
     // props destructuring
-    const { selectedImages, setSelectedImages } = props;
+    const { selectedImages, setSelectedImages, activeId } = props;
 
     //Handle-checkbox function for selecting images
     const handleCheckboxChange = (index) => {
@@ -51,7 +55,8 @@ export const Photo = forwardRef(
             alt={index}
             width={200}
             height={200}
-            className="image w-full h-full border-2 border-gray-300 rounded-lg"
+            style={{ opacity: url === activeId ? 0 : 1 }}
+            className="image w-full h-full rounded-lg"
           />
         </div>
       </>

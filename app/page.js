@@ -77,6 +77,7 @@ const Home = () => {
                 key={url}
                 url={url}
                 index={index}
+                activeId={activeId}
                 selectedImages={selectedImages}
                 setSelectedImages={setSelectedImages}
               />
