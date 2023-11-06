@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+  <br>
+ Drag & drop images gallery
+  <br>
+</h1>
 
-## Getting Started
+<p align="center">
+  Live Site: <a href="https://image-gallery-drag-drop.vercel.app/">https://image-gallery-drag-drop.vercel.app/
+</a>
+  
+</p>
 
-First, run the development server:
+## Project Features
+
+1. **Gallery Layout:**
+   - Implement a grid layout for the image gallery.
+   - The gallery should display images with one feature image larger than the others.
+2. **Sorting:**
+   - Enable reordering functionality to allow users to rearrange the order of images in the gallery.
+   - Implement drag-and-drop functionality or any other intuitive method for reordering.
+3. **Deleting Multiple Images:**
+   - Allow users to select multiple images and delete them.
+   - Provide a clear visual indication of selected images.
+4. **Setting Feature Image:**
+   - Allow users to set a feature image by sorting.
+   - Pretend the first image (from the LTR direction) as the featured image
+   - The feature image should be visually distinct from the other images.
+5. **User Experience:**
+   - Ensure a smooth and responsive user experience.
+   - Implement transitions or animations for a polished look and feel.
+
+## How To Use
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone this repository
+$ git clone https://github.com/ashiq72/car-rental.git
+
+# Go into the repository
+$ cd car-rental
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Note**
+> If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Emailware
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Car Rental is an [emailware](https://en.wiktionary.org/wiki/emailware). Meaning, if you liked using this app or it has helped you in any way, I'd like you send me an email at <ahmedashik18k@gmail.com> about anything you'd want to say about this software. I'd really appreciate it!
 
-## Learn More
+## Credits
 
-To learn more about Next.js, take a look at the following resources:
+This software uses the following open source packages:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next Js - App Router](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [dnd-kit](https://dndkit.com/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Support
 
-## Deploy on Vercel
+<a href="https://www.buymeacoffee.com/ahmedashik9" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/purple_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p>Or</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<a href="">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
+## You may also like...
+
+- [crowdfunding](https://github.com/ashiq72/crowdfunding-application-client) - A crowdfunding for Windows and mac
+- - [Travel To Go](https://github.com/ashiq72/travel-services-reviews-website-client) - A Travel reaviw website
+
+## License
+
+MIT
+
+---
+
+> [ashiquzzaman.netlify.app](https://ashiquzzaman.netlify.app/) &nbsp;&middot;&nbsp;
+> GitHub [@ashiq72](https://github.com/ashiq72) &nbsp;&middot;&nbsp;
+> Twitter [@ashiq72](https://twitter.com/)
