@@ -130,7 +130,7 @@ const Home = () => {
             items?.length <= 0
               ? "row-span-2 col-span-2 w-full h-full p-[100%] "
               : "row-auto col-auto "
-          }col-span-1 row-span-1 bg-slate-300 flex items-center justify-center border-dotted border-[3px]  rounded-md border-gray-400 min-content relative py-[40%] `}
+          }col-span-1 row-span-1 bg-slate-300 flex items-center justify-center border-dotted border-[3px]  rounded-md border-gray-400 min-content relative xl:py-[30%] lg:py-[30%] md:py-[25%] py-[20%] `}
         >
           <span
             className="text-blue-600"
