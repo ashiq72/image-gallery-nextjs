@@ -6,6 +6,7 @@ import React, { forwardRef, useState } from "react";
 export const Photo = forwardRef(
   ({ url, index, faded, style, ...props }, ref) => {
     const [checkboxShow, setCheckboxShow] = useState(false);
+    console.log(checkboxShow);
 
     // Style for image card
     const inlineStyles = {
@@ -40,16 +41,20 @@ export const Photo = forwardRef(
           style={inlineStyles}
           {...props}
           className="image-container"
+          onMouseOver={() => setCheckboxShow(true)}
+          onMouseLeave={() => setCheckboxShow(false)}
         >
-          <input
-            type="checkbox"
-            checked={selectedImages?.includes(index)}
-            onMouseDown={(e) => {
-              e.preventDefault(); // Prevent the default checkbox behavior
-              handleCheckboxChange(index);
-            }}
-            className="absolute m-2"
-          />
+          {checkboxShow && (
+            <input
+              type="checkbox"
+              checked={selectedImages?.includes(index)}
+              onMouseDown={(e) => {
+                e.preventDefault(); // Prevent the default checkbox behavior
+                handleCheckboxChange(index);
+              }}
+              className="absolute m-2"
+            />
+          )}
           <Image
             src={url}
             alt={index}
