@@ -62,26 +62,39 @@ const Home = () => {
     <div className="2xl:mx-96 mx-2 my-20 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
       <div className="flex justify-between border-b-2 py-4 px-4">
         <div className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            checked={selectedImages.length > 0}
-            id="vehicle1"
-            name="vehicle1"
-            value="Bike"
-          />
-          <h1 className="text-lg font-semibold">
-            {selectedImages.length} Files Selected
-          </h1>
+          {selectedImages.length > 0 ? (
+            <>
+              <input
+                type="checkbox"
+                checked={selectedImages.length > 0}
+                id="vehicle1"
+                name="vehicle1"
+                value="Bike"
+              />
+              <h1 className="text-lg font-semibold">
+                {selectedImages.length}
+                <span> Files Selected</span>
+              </h1>
+            </>
+          ) : (
+            <>
+              <span className="text-lg font-semibold">Gallery</span>
+            </>
+          )}
         </div>
 
         <div>
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 text-white p-2 rounded-md mt-2"
-            disabled={selectedImages.length === 0}
-          >
-            Delete Selected
-          </button>
+          {selectedImages.length > 0 ? (
+            <>
+              <button
+                onClick={handleDelete}
+                className="text-lg font-semibold hover:underline hover:underline-offset-2 duration-300 text-red-500 "
+                disabled={selectedImages.length === 0}
+              >
+                Delete files
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
       <Grid columns={5}>

@@ -47,6 +47,7 @@ export const Photo = forwardRef(
             <input
               type="checkbox"
               checked={selectedImages?.includes(index)}
+              onChange={(e) => {}}
               onMouseDown={(e) => {
                 e.preventDefault(); // Prevent the default checkbox behavior
                 handleCheckboxChange(index);
