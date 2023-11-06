@@ -59,7 +59,7 @@ const Home = () => {
     setActiveId(null);
   }
   return (
-    <div className="2xl:mx-96 mx-2 my-20 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
+    <div className="2xl:mx-96 mx-2 my-4 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
       <div className="flex justify-between border-b-2 py-4 px-4">
         <div className="flex items-center gap-2">
           {selectedImages.length > 0 ? (
@@ -71,14 +71,14 @@ const Home = () => {
                 name="vehicle1"
                 value="Bike"
               />
-              <h1 className="text-lg font-semibold">
+              <h1 className="text-xl font-semibold">
                 {selectedImages.length}
                 <span> Files Selected</span>
               </h1>
             </>
           ) : (
             <>
-              <span className="text-lg font-semibold">Gallery</span>
+              <span className="text-2xl font-semibold">Gallery</span>
             </>
           )}
         </div>
@@ -88,7 +88,7 @@ const Home = () => {
             <>
               <button
                 onClick={handleDelete}
-                className="text-lg font-semibold hover:underline hover:underline-offset-2 duration-300 text-red-500 "
+                className="text-xl font-semibold hover:underline hover:underline-offset-2 duration-300 text-red-500 "
                 disabled={selectedImages.length === 0}
               >
                 Delete files
@@ -97,7 +97,8 @@ const Home = () => {
           ) : null}
         </div>
       </div>
-      <Grid columns={5}>
+      {/* image card item  */}
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 pt-6">
         <DndContext
           sensors={sensors}
           onDragStart={handleDragStart}
@@ -129,7 +130,7 @@ const Home = () => {
             items?.length <= 0
               ? "row-span-2 col-span-2 w-full h-full p-[100%] "
               : "row-auto col-auto "
-          }col-span-1 row-span-1 bg-slate-300 flex items-center justify-center border-dotted border-[3px]  rounded-md border-gray-400 min-content relative py-[50%] `}
+          }col-span-1 row-span-1 bg-slate-300 flex items-center justify-center border-dotted border-[3px]  rounded-md border-gray-400 min-content relative py-[40%] `}
         >
           <span
             className="text-blue-600"
@@ -147,7 +148,7 @@ const Home = () => {
             // onChange={onFileSelect}
           ></input>
         </div>
-      </Grid>
+      </div>
     </div>
   );
 };
