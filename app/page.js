@@ -1,41 +1,50 @@
 "use client";
+import React, { useState } from "react";
+import {
+  DndContext,
+  MouseSensor,
+  DragOverlay,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 
-import ImageGallery from "./components/ImageGallery";
+import photos from "./../photos.json";
+import { Grid } from "./components/Grid";
+import { SortablePhoto } from "./components/SortablePhoto";
+import { Photo } from "./components/Photo";
 
-import Image from "next/image";
-import { useRef, useState } from "react";
-
-export default function Home() {
-  const [images, setImages] = useState([]);
-
+const Home = () => {
+  // const [items, setItems] = useState(photos);
+  const [items, setItems] = useState([
+    "https://i.postimg.cc/tTn9s24Q/image-1.webp",
+    "https://i.postimg.cc/brQ8Trnm/image-2.webp",
+    "https://i.postimg.cc/nV7HZRWq/image-3.webp",
+    "https://i.postimg.cc/FsVNkfNR/image-4.webp",
+    "https://i.postimg.cc/28DC5dpM/image-5.webp",
+    "https://i.postimg.cc/qvB0skvG/image-6.webp",
+    "https://i.postimg.cc/x1sQgWkV/image-7.webp",
+    "https://i.postimg.cc/FK84X3gP/image-8.webp",
+    "https://i.postimg.cc/vmcsK39g/image-9.webp",
+    "https://i.postimg.cc/76zyHhKq/image-10.jpg",
+    "https://i.postimg.cc/nrtfCxWB/image-11.jpg",
+  ]);
   const [selectedImages, setSelectedImages] = useState([]);
+  console.log(selectedImages);
 
-  const fileInputRef = useRef(null);
-  function selectFiles() {
-    fileInputRef.current.click();
-  }
-  function handleImage(e) {
-    setImages(e.target.files[0]);
+  function handleDelete() {
+    const updatedImages = items.filter((_, i) => !selectedImages.includes(i));
+    setItems(updatedImages);
+    setSelectedImages([]);
   }
 
-  function onFileSelect(event) {
-    const files = event.target.files;
-    if (files.length === 0) return;
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].type.split("/")[0] !== "image") continue;
-      if (!images.some((e) => e.name === files[i].name)) {
-        setImages((prevImages) => [
-          ...prevImages,
-          {
-            name: files[i].name,
-            url: URL.createObjectURL(files[i]),
-          },
-        ]);
-      }
-    }
-  }
+  // console.log(items);
+  // console.log(selectedImages);
+  const [activeId, setActiveId] = useState(null);
+  const sensors = useSensors(useSensor(MouseSensor));
 
   const handleCheckboxChange = (index) => {
+    console.log("handleC", index);
     if (selectedImages.includes(index)) {
       setSelectedImages(
         selectedImages.filter((selectedId) => selectedId !== index)
@@ -44,30 +53,10 @@ export default function Home() {
       setSelectedImages([...selectedImages, index]);
     }
   };
-  function handleDelete() {
-    const updatedImages = images.filter((_, i) => !selectedImages.includes(i));
-    setImages(updatedImages);
-    setSelectedImages([]);
-  }
-
-  const handleDragStart = (e, index) => {
-    e.dataTransfer.setData("text/plain", index);
-  };
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-  const handleDrop = (e, toIndex) => {
-    e.preventDefault();
-    const fromIndex = e.dataTransfer.getData("text/plain");
-    const updatedImages = [...images];
-    const [draggedImage] = updatedImages.splice(fromIndex, 1);
-    updatedImages.splice(toIndex, 0, draggedImage);
-    setImages(updatedImages);
-  };
 
   return (
-    <div>
-      <div className="flex justify-between border-b-2 py-4 px-8">
+    <div className="lg:mx-96 mx-2 my-20 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
+      <div className="flex justify-between border-b-2 py-4 px-4">
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -91,76 +80,54 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-4 p-4">
-        {images?.map((image, index) => (
-          <div
-            key={index}
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, index)}
-            className={`${
-              index === 0 ? "row-span-2 col-span-2" : "row-auto "
-            } col-span-1 relative border-2 border-gray-100 rounded-md`}
-          >
-            <input
-              type="checkbox"
-              className="absolute top-2 left-2"
-              checked={selectedImages.includes(index)}
-              onChange={() => handleCheckboxChange(index)}
-            />
-            <Image
-              src={image.url}
-              alt={index}
-              width={200}
-              height={200}
-              className="w-full h-full"
-            />
-          </div>
-        ))}
-        <div
-          onClick={() => handleImage}
-          className={`${
-            images?.length <= 0
-              ? "row-span-2 col-span-2 w-full h-full p-[100%] "
-              : "row-auto col-auto "
-          }col-span-1 row-span-1 bg-slate-300 flex items-center justify-center border-dotted border-2 rounded-md border-gray-500 min-content relative p-[43%] `}
+      <Grid columns={5}>
+        <DndContext
+          sensors={sensors}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
         >
-          <span className="text-blue-600" role="button" onClick={selectFiles}>
-            {" "}
-            Add image
-          </span>
-          <input
-            name="file"
-            type="file"
-            className="hidden "
-            multiple
-            ref={fileInputRef}
-            onChange={onFileSelect}
-          ></input>
-        </div>
-      </div>
+          <SortableContext items={items}>
+            {items.map((url, index) => (
+              <SortablePhoto
+                key={url}
+                url={url}
+                index={index}
+                handleCheckboxChange={handleCheckboxChange}
+                selectedImages={selectedImages}
+                setSelectedImages={setSelectedImages}
+              />
+            ))}
+          </SortableContext>
+
+          <DragOverlay adjustScale={true}>
+            {activeId ? (
+              <Photo url={activeId} index={items.indexOf(activeId)} />
+            ) : null}
+          </DragOverlay>
+        </DndContext>
+        <div>upload</div>
+      </Grid>
     </div>
   );
-}
 
-// const Home = () => {
-//   const images = [
-//     { id: "1", url: "/image-1.webp", isFeature: false },
-//     { id: "2", url: "/image-2.webp", isFeature: true },
-//     { id: "3", url: "/image-3.webp", isFeature: false },
-//     { id: "4", url: "/image-4.webp", isFeature: false },
-//     { id: "5", url: "/image-5.webp", isFeature: false },
-//     { id: "6", url: "/image-6.webp", isFeature: false },
-//   ];
+  function handleDragStart(event) {
+    setActiveId(event.active?.id);
+  }
 
-//   return (
-//     <div className="App">
-//       <h1>Image Gallery</h1>
-//       <div className="grid grid-cols-5 gap-4 p-4">
-//         <ImageGallery images={images} />
-//       </div>
-//     </div>
-//   );
-// };
+  function handleDragEnd(event) {
+    const { active, over } = event;
 
-// export default Home;
+    if (active?.id !== over?.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active?.id);
+        const newIndex = items.indexOf(over?.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+
+    setActiveId(null);
+  }
+};
+
+export default Home;

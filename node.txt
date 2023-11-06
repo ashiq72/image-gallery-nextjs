@@ -1,6 +1,0 @@
-Dear Hiring team,
-
-Thank you for offering me a task for React JS Developer position at  Ollyo. I will try to complete and submit ASAP.
-
-My have a question for further clarification. Task instructions are given inside the file: (## Guidelines: - You are free to use any additional libraries or frameworks as needed.) 
-Could I use next js framework?
