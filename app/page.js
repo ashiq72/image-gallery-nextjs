@@ -39,8 +39,27 @@ const Home = () => {
     setSelectedImages([]);
   }
 
+  // Handle-dragStart function by dnd-kit/sortable package
+  function handleDragStart(event) {
+    setActiveId(event.active?.id);
+  }
+  // Handle-dragEnd function by dnd-kit/sortable package
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (active?.id !== over?.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active?.id);
+        const newIndex = items.indexOf(over?.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+
+    setActiveId(null);
+  }
   return (
-    <div className="lg:mx-96 mx-2 my-20 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
+    <div className="2xl:mx-96 mx-2 my-20 lg:p-4 p-1 bg-slate-100 shadow-lg rounded">
       <div className="flex justify-between border-b-2 py-4 px-4">
         <div className="flex items-center gap-2">
           <input
@@ -90,29 +109,34 @@ const Home = () => {
             ) : null}
           </DragOverlay>
         </DndContext>
-        <div>upload</div>
+        {/* Add Image section */}
+        <div
+          // onClick={() => handleImage}
+          className={`${
+            items?.length <= 0
+              ? "row-span-2 col-span-2 w-full h-full p-[100%] "
+              : "row-auto col-auto "
+          }col-span-1 row-span-1 bg-slate-300 flex items-center justify-center border-dotted border-[3px]  rounded-md border-gray-400 min-content relative py-[50%] `}
+        >
+          <span
+            className="text-blue-600"
+            role="button"
+            //  onClick={selectFiles}
+          >
+            Add image
+          </span>
+          <input
+            name="file"
+            type="file"
+            className="hidden "
+            multiple
+            // ref={fileInputRef}
+            // onChange={onFileSelect}
+          ></input>
+        </div>
       </Grid>
     </div>
   );
-
-  function handleDragStart(event) {
-    setActiveId(event.active?.id);
-  }
-
-  function handleDragEnd(event) {
-    const { active, over } = event;
-
-    if (active?.id !== over?.id) {
-      setItems((items) => {
-        const oldIndex = items.indexOf(active?.id);
-        const newIndex = items.indexOf(over?.id);
-
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-
-    setActiveId(null);
-  }
 };
 
 export default Home;
